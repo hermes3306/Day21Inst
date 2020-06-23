@@ -43,7 +43,7 @@ $Day0 		= strtotime($Day0);
 $DayN		= strtotime(date("Y-m-d"));
 $N		= ($DayN - $Day0)/60/60/24;
 
-if($N <1 or $N > 21) {
+if($N <0 or $N > 21) {
 	echo "Not started or finished! \n";
 	echo "Day # is " . $N . " \n";
 	exit();
@@ -52,7 +52,6 @@ if($N <1 or $N > 21) {
 $DaySubject	= "<h2><string>Day " . $N . " - " . date("l, j F Y") . "</strong></h2>";
 
 $urls = array();
-array_push($urls, "-");
 foreach ($props['urls']  as $url) { 
 	array_push($urls, $url);
 }
@@ -62,7 +61,13 @@ foreach ($props['urls']  as $url) {
  * 
  *
  */
-$url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
+$url = ".";
+if($N == 0) {
+	$url 	= "<img src='" .$urls[$N] . "'/>" ;
+} else {
+	$url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
+}
+
 /* $daycont                = file_get_contents($mbox_home . "/cont1/Day".$N.".htm"); */
 $daycont                = file_get_contents("http://ez-hub.club/cont1/Day".$N.".htm");
 $Subject                = "Day " . $N . " for " . $props['Name'];
