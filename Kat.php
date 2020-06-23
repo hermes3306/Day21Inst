@@ -10,12 +10,7 @@ require     $mbox_home . '/vendor/autoload.php';
  * 
  */
 
-if($argc < 2) {
-	echo "usage: php Day21.php sample.ini\n";
-	exit(-1);
-}
-
-$props	 = parse_ini_file($mbox_home . "/" . $argv[1] ); 
+$props	 = parse_ini_file($mbox_home . '/Kat.ini'); 
 
 $mail 	= new PHPMailer(true);
 $mail->isSMTP();

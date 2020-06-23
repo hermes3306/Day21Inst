@@ -10,12 +10,7 @@ require     $mbox_home . '/vendor/autoload.php';
  * 
  */
 
-if($argc < 2) {
-	echo "usage: php Day21.php sample.ini\n";
-	exit(-1);
-}
-
-$props	 = parse_ini_file($mbox_home . "/" . $argv[1] ); 
+$props	 = parse_ini_file($mbox_home . '/Day21.ini'); 
 
 $mail 	= new PHPMailer(true);
 $mail->isSMTP();
@@ -65,7 +60,7 @@ foreach ($props['urls']  as $url) {
 $url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
 /* $daycont                = file_get_contents($mbox_home . "/cont1/Day".$N.".htm"); */
 $daycont                = file_get_contents("http://ez-hub.club/cont1/Day".$N.".htm");
-$Subject                = "Day " . $N . " for " . $props['Name'];
+$Subject                = "Day " . $N;
 $Body                   = $daycont . "<br><br>" . $url; 
 
 $mail->Subject =  	$Subject;
