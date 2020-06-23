@@ -61,7 +61,6 @@ foreach ($props['urls']  as $url) {
  * 
  *
  */
-$url = ".";
 if($N == 0) {
 	$url 	= "<img src='" .$urls[$N] . "'/>" ;
 } else {
