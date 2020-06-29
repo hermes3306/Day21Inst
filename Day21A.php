@@ -61,47 +61,24 @@ foreach ($props['urls']  as $url) {
  * 
  *
  */
-if($N == 0) {
-	$url 	= "<img src='" .$urls[$N] . "'/>" ;
-} else {
-	$url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
+
+for($N = 0; $N <= 21; $N++) {
+	if($N == 0) $url 	= "<img src='" .$urls[$N] . "'/>" ;
+	else  	$url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
+
+	$daycont                = file_get_contents("http://ez-hub.club/contL/Day".$N.".htm");
+	$daycont		= str_replace("{{Today}}", date("l, j F Y"), $daycont);
+	$daycont		= str_replace("{{Day}}", date("l"), $daycont);
+	$daycont		= str_replace("{{DayN}}", "Day ".$N , $daycont);
+
+	$Subject                = "Day " . $N . " for " . $props['Name'];
+	$Body                   = $daycont . "<br><br>" . $url; 
+
+	$mail->Subject =  	$Subject;
+	$mail->Body =        	$Body;
+	$mail->send();
+	
+	echo "Day ". $N . " sent!";
 }
-
-/* $daycont                = file_get_contents($mbox_home . "/cont1/Day".$N.".htm"); */
-$daycont                = file_get_contents("http://ez-hub.club/contL/Day".$N.".htm");
-
-$daycont		= str_replace("{{Today}}", date("l, j F Y"), $daycont);
-$daycont		= str_replace("{{Day}}", date("l"), $daycont);
-$daycont		= str_replace("{{DayN}}", "Day ".$N , $daycont);
-
-$Subject                = "Day " . $N . " for " . $props['Name'];
-$Body                   = $daycont . "<br><br>" . $url; 
-
-$mail->Subject =  	$Subject;
-$mail->Body =        	$Body;
-$mail->send();
-
-echo "" . date("m-d-Y G:i:s") . " - Day " . $N . " for " . $props['Name'] . " sent!\n" ;
-
-$db     =       new SQLite3('Day21.db');
-$db->exec("CREATE TABLE IF NOT EXISTS Day21 (
-	name    text,
-	day     integer,
-	status  text,
-	created datetime,
-	cr_date text,
-	cr_time text)");
-
-$stmt = $db->prepare("INSERT INTO Day21 (name, day, status, cr_date, cr_time, created) 
-			VALUES (:name, :day, :status, :cr_date, :cr_time, current_timestamp)");
-$stmt->bindValue(':name', $props['Name']);
-$stmt->bindValue(':day', $N );
-$stmt->bindValue(':status', 'OK');
-$stmt->bindValue(':cr_date', date('Y-m-d'));
-$stmt->bindValue(':cr_time', date('G:i:s'));
-$stmt->execute();
-$db->close();
-
-
 
 ?>
