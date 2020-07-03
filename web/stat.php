@@ -12,21 +12,19 @@ echo "
 <table border='0' align='left'>
 <tr>
 <td>Name</td>
-<td>Day</td>
-<td>Date</td>
-<td>Time</td>
-<td>Status</td>
+<td>Last Day</td>
+<td>Count</td>
+<td>Remains</td>
 </tr> ";
 
 $db     =       new SQLite3("/home/pi/code/Day21Inst/Day21.db");
 
-$res = $db->query('SELECT * FROM Day21');
+$res = $db->query('SELECT name, max(day) as d, count(day) as m, 21-max(day) as r  FROM Day21 group by name');
 while ($row = $res->fetchArray()) {
                 echo "<tr>	<td>{$row['name']}</td> 
-			  	<td>{$row['day']}</td>
-			  	<td>{$row['cr_date']}</td>
-			  	<td>{$row['cr_time']}</td>
-				<td>{$row['status']}</td> </tr>";
+			  	<td>{$row['d']}</td>
+			  	<td>{$row['m']}</td>
+				<td>{$row['r']}</td> </tr>";
 }
 $db->close();
 echo "</table>
