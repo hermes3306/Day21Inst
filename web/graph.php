@@ -47,14 +47,7 @@ function drawBasic() {
   </head>
   <body>
 
-
-<a href='/php/show.php'>Show</a> </td> |
-<a href='/php/stat.php'>Statistics</a> </td> |
-<a href='/php/graph.php'>Graph</a> </td>
-<br>
-<br>
-
-
+<?php include ('menu.php'); ?> 
     <div id="chart_div" style="width: 450; height: 250px;"></div>
   </body>
 </html>

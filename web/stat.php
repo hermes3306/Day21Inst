@@ -1,14 +1,9 @@
+<html><body>
+<?php include('common.php'); ?>
+<?php include('menu.php'); ?>
+
 <?php
 echo "
-<html>
-<body>
-
-<a href='/php/show.php'>Show</a> </td> | 
-<a href='/php/stat.php'>Statistics</a> </td> | 
-<a href='/php/graph.php'>Graph</a> </td>  
-<br>
-<br>
-
 <table border='0' align='left'>
 <tr>
 <td>Name</td>
@@ -17,7 +12,7 @@ echo "
 <td>Remains</td>
 </tr> ";
 
-$db     =       new SQLite3("/home/pi/code/Day21Inst/Day21.db");
+$db     =       new SQLite3($mbox_home . "/Day21.db");
 
 $res = $db->query('SELECT name, max(day) as d, count(day) as m, 21-max(day) as r  FROM Day21 group by name');
 while ($row = $res->fetchArray()) {

@@ -1,13 +1,9 @@
-<?php
-echo "
-<html>
-<body>
+<html><body>
+<?php include('common.php'); ?>
+<?php include('menu.php'); ?>
 
-<a href='/php/show.php'>Show</a> </td> | 
-<a href='/php/stat.php'>Statistics</a> </td> | 
-<a href='/php/graph.php'>Graph</a> </td>  
-<br>
-<br>
+<?php 
+echo "
 
 <table border='0' align='left'>
 <tr>
@@ -18,7 +14,7 @@ echo "
 <td>Status</td>
 </tr> ";
 
-$db     =       new SQLite3("/home/pi/code/Day21Inst/Day21.db");
+$db     =       new SQLite3($mbox_home . "/Day21.db");
 
 $res = $db->query('SELECT * FROM Day21');
 while ($row = $res->fetchArray()) {
