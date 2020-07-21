@@ -67,8 +67,8 @@ if($N == 0) {
 	$url                    = "<a href='" . $urls[$N] . "'>" . $urls[$N] . "</a>"  ;
 }
 
-/* $daycont                = file_get_contents($mbox_home . "/cont1/Day".$N.".htm"); */
-$daycont                = file_get_contents("http://ez-hub.club/contL/Day".$N.".htm");
+$daycont                = file_get_contents($mbox_home . "/www/cont1/Day".$N.".htm"); 
+/*$daycont                = file_get_contents("http://ez-hub.club/contL/Day".$N.".htm"); */
 
 $daycont		= str_replace("{{Today}}", date("l, j F Y"), $daycont);
 $daycont		= str_replace("{{Day}}", date("l"), $daycont);
